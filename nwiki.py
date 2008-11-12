@@ -29,7 +29,7 @@ def skeleton(title, content):
           <div id="mainCol">
             <ul>
               <li><a href="#">Home</a></li>
-              <li><a href="#">Edit</a></li>
+              <li><a href="/edit/%s">Edit</a></li>
               <li><a href="#">Browse</a></li>
               <li><a href="#">About</a></li>
             </ul>
@@ -46,7 +46,7 @@ def skeleton(title, content):
       </body>
     </html>
   '''
-  return page % (title, title, content)
+  return page % (title, title, title, content)
 
 class WikiEditor:
     def __init__(self):

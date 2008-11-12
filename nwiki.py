@@ -3,8 +3,10 @@
 import web
 from couchdb import Server
 from couchdb import ResourceNotFound
+import os
 
 urls = (
+    '/edit/(.*)', 'WikiEditor',
     '/(.*)', 'WikiPage'
 )
 
@@ -16,12 +18,12 @@ def skeleton(title, content):
       <head>
       <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
       <title>%s - nwiki</title>
-      <link rel="stylesheet" media="screen" type="text/css" href="static/css/style.css" />
+      <link rel="stylesheet" media="screen" type="text/css" href="/static/css/style.css" />
       </head>
       <body>
         <div id="masthead">
           <div id="logo">
-            <img src="static/images/jolly.jpeg" />
+            <img src="/static/images/jolly.jpeg" />
           </div>
           <h1>%s</h1>
           <div id="mainCol">
@@ -46,14 +48,41 @@ def skeleton(title, content):
   '''
   return page % (title, title, content)
 
+class WikiEditor:
+    def __init__(self):
+        self.db = Server('http://localhost:5984')['nwiki']
+
+    def form(self, name, document=''):
+        doc = '''
+        <h2>You are editing %s</h2>
+        <form method="post" accept-charset="utf-8" action="%s">
+          <input name="fname" type="hidden" value="%s" />
+          <textarea name="page" cols="100" rows="20">%s</textarea>
+          <br /><br />
+          <input name="action" type="submit" value="Update" />&nbsp;
+          <input name="action" type="submit" value="Preview" />&nbsp;
+          <input name="action" type="submit" value="Discard" />
+        </form>
+        '''
+        return doc % (name, name, name, document)
+
+    def GET(self, name):
+        wiki = ''
+        doc = self.form(name, wiki)
+        print skeleton(name, doc)
+
 class WikiPage:
     def __init__(self):
         self.db = Server('http://localhost:5984')['nwiki']
 
     def info(self, name, type):
         if type == 'dne':
-            msg = '''<p>%s does not exist. Create?</p>'''
-            return msg % (name)
+            msg = '''
+            <p>
+              %s does not exist. <a href="%s">Create?</a>
+            </p>
+            '''
+            return msg % (name, os.path.join('/edit', name))
         else:
             return ''
 

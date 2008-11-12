@@ -10,6 +10,9 @@ urls = (
     '/(.*)', 'WikiPage'
 )
 
+server = Server('http://localhost:5984')
+db = server['nwiki']
+
 def skeleton(title, content):
   page = '''
     <!DOCTYPE html PUBLIC "-//W3C/DTD XHTML 1.0 Strict//EN"
@@ -49,9 +52,6 @@ def skeleton(title, content):
   return page % (title, title, title, content)
 
 class WikiEditor:
-    def __init__(self):
-        self.db = Server('http://localhost:5984')['nwiki']
-
     def form(self, name, document=''):
         doc = '''
         <h2>You are editing %s</h2>
@@ -67,14 +67,12 @@ class WikiEditor:
         return doc % (name, name, name, document)
 
     def GET(self, name):
-        wiki = ''
+        doc = db[name]
+        wiki = doc['content']
         doc = self.form(name, wiki)
         print skeleton(name, doc)
 
 class WikiPage:
-    def __init__(self):
-        self.db = Server('http://localhost:5984')['nwiki']
-
     def info(self, name, type):
         if type == 'dne':
             msg = '''
@@ -90,7 +88,7 @@ class WikiPage:
         if name == '/' or name == '' or not name:
             name='GoAway'
         try:
-            doc = self.db[name]
+            doc = db[name]
             print skeleton(name, doc['content'])
         except ResourceNotFound:
             print skeleton(name, self.info(name, 'dne'))

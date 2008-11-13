@@ -122,6 +122,9 @@ class WikiEditor:
             except ResourceNotFound:
                 db[name] = {'content' : inparms.page}
                 web.redirect('/%s' % (name))
+        elif inparms.action == 'Discard':
+            # Go Home instead of Browse
+            web.redirect('/')
 
 class WikiPage:
     def info(self, name, type):

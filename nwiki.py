@@ -67,10 +67,32 @@ class WikiEditor:
         return doc % (name, name, name, document)
 
     def GET(self, name):
-        doc = db[name]
-        wiki = doc['content']
-        doc = self.form(name, wiki)
-        print skeleton(name, doc)
+        try:
+            doc = db[name]
+            editor = self.form(name, doc['content'])
+            print skeleton(name, editor)
+        except ResourceNotFound:
+            editor = self.form(name, '')
+            print skeleton(name, editor)
+
+    def getPreview(self, name, inparms):
+        preview = "<h2>Preview</h2>" + inparms.page + self.form(name, inparms.page)
+        return preview
+
+    def POST(self, name):
+        inparms = web.input()
+        if inparms.action == 'Preview':
+            print skeleton(name, self.getPreview(name, inparms))
+            return
+        elif inparms.action == 'Update':
+            try:
+                doc = db[name]
+                doc['content'] = inparms.page
+                db[name] = doc
+                web.redirect('/%s' % (name))
+            except ResourceNotFound:
+                db[name] = {'content' : inparms.page}
+                web.redirect('/%s' % (name))
 
 class WikiPage:
     def info(self, name, type):

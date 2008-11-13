@@ -7,6 +7,7 @@ import os
 
 urls = (
     '/edit/(.*)', 'WikiEditor',
+    '/browse', 'WikiBrowser',
     '/(.*)', 'WikiPage'
 )
 
@@ -31,10 +32,10 @@ def skeleton(title, content):
           <h1>%s</h1>
           <div id="mainCol">
             <ul>
-              <li><a href="#">Home</a></li>
+              <li><a href="/">Home</a></li>
               <li><a href="/edit/%s">Edit</a></li>
-              <li><a href="#">Browse</a></li>
-              <li><a href="#">About</a></li>
+              <li><a href="/browse">Browse</a></li>
+              <li><a href="/About">About</a></li>
             </ul>
           </div>
         </div>
@@ -50,6 +51,34 @@ def skeleton(title, content):
     </html>
   '''
   return page % (title, title, title, content)
+
+class WikiBrowser:
+    def GET(self, dir='.'):
+        doc = "<h3>Click on a file to edit it</h3>"
+        doc += """
+        <table>
+          <tr>
+            <td>Name</td>
+            <td>Type</td>
+            <td>Size</td>
+            <td>Extract</td>
+            <td>Actions</td>
+          </tr>
+        """
+        rows = ''
+        for document in db:
+          rows += """
+          <tr>
+            <td><a href="/%s">%s</a></td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+          </tr>
+          """ % (document, document)
+        doc += rows
+        doc += "</table>"
+        print skeleton("Browse", doc)
 
 class WikiEditor:
     def form(self, name, document=''):

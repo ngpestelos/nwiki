@@ -4,6 +4,7 @@ import web
 from couchdb import Server
 from couchdb import ResourceNotFound
 import os
+from datetime import datetime
 
 urls = (
     '/edit/(.*)', 'WikiEditor',
@@ -91,12 +92,15 @@ class WikiEditor:
         inparms = web.input()
         if inparms.action == 'Update':
             try:
+                updated = datetime.now().isoformat()
                 doc = db[name]
-                doc['content'] = inparms.page
+                doc['content'] = inparms.page 
+                doc['updated'] = updated
                 db[name] = doc
                 web.redirect('/%s' % (name))
             except ResourceNotFound:
-                db[name] = {'content' : inparms.page}
+                posted = datetime.now().isoformat()
+                db[name] = {'content' : inparms.page, 'posted' : posted}
                 web.redirect('/%s' % (name))
         elif inparms.action == 'Discard':
             # Go Home instead of Browse

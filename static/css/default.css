@@ -2,6 +2,7 @@ body {
   font-family: Verdana, Arial, sans-serif;
   font-size: 14px;
   margin: 10px;
+  line-height: 1.5em;
 }
 
 h1 { font-size: 200%; }

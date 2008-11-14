@@ -103,8 +103,7 @@ class WikiEditor:
                 db[name] = {'content' : inparms.page, 'posted' : posted}
                 web.redirect('/%s' % (name))
         elif inparms.action == 'Discard':
-            # Go Home instead of Browse
-            web.redirect('/')
+            web.redirect('/%s' % (name))
 
 class WikiPage:
     def info(self, name, type):

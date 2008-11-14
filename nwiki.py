@@ -54,30 +54,14 @@ def skeleton(title, content):
 
 class WikiBrowser:
     def GET(self, dir='.'):
-        doc = "<h3>Click on a file to edit it</h3>"
-        doc += """
-        <table>
-          <tr>
-            <td>Name</td>
-            <td>Type</td>
-            <td>Size</td>
-            <td>Extract</td>
-            <td>Actions</td>
-          </tr>
-        """
+        doc = "<ul>"
         rows = ''
         for document in db:
           rows += """
-          <tr>
-            <td><a href="/%s">%s</a></td>
-            <td>&nbsp;</td>
-            <td>&nbsp;</td>
-            <td>&nbsp;</td>
-            <td>&nbsp;</td>
-          </tr>
+          <li><a href="/%s">%s</a></li>
           """ % (document, document)
         doc += rows
-        doc += "</table>"
+        doc += "</ul>"
         print skeleton("Browse", doc)
 
 class WikiEditor:
@@ -89,7 +73,6 @@ class WikiEditor:
           <textarea name="page" cols="100" rows="20">%s</textarea>
           <br /><br />
           <input name="action" type="submit" value="Update" />&nbsp;
-          <input name="action" type="submit" value="Preview" />&nbsp;
           <input name="action" type="submit" value="Discard" />
         </form>
         '''
@@ -104,16 +87,9 @@ class WikiEditor:
             editor = self.form(name, '')
             print skeleton(name, editor)
 
-    def getPreview(self, name, inparms):
-        preview = "<h2>Preview</h2>" + inparms.page + self.form(name, inparms.page)
-        return preview
-
     def POST(self, name):
         inparms = web.input()
-        if inparms.action == 'Preview':
-            print skeleton(name, self.getPreview(name, inparms))
-            return
-        elif inparms.action == 'Update':
+        if inparms.action == 'Update':
             try:
                 doc = db[name]
                 doc['content'] = inparms.page

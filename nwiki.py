@@ -69,7 +69,7 @@ class WikiEditor:
     def form(self, name, document=''):
         doc = '''
         <h2>You are editing %s</h2>
-        <form method="post" accept-charset="utf-8" action="%s">
+        <form method="post" accept-charset="utf-8" action="/edit/%s">
           <input name="fname" type="hidden" value="%s" />
           <textarea name="page" cols="100" rows="20">%s</textarea>
           <br /><br />

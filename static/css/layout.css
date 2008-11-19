@@ -27,10 +27,11 @@
 }
 
 #footer {
-  margin-right: 40%;
+  /*margin-right: 40%;*/
+  clear: both;
   padding: 10px;
   /*border: 1px solid #000;*/
-  /*text-align: center;*/
+  text-align: center;
 }
 
 #logo {

@@ -46,7 +46,6 @@ def skeleton(title, content):
         <div id="sidebar">
         </div>
         <div id="footer">
-          &copy; 2008 Nestor G Pestelos Jr (ngpestelos@gmail.com)
         </div>
       </body>
     </html>

@@ -1,0 +1,40 @@
+$def with (doc)
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Browse - nwiki</title>
+    <!-- Framework CSS -->
+    <link rel="stylesheet" href="static/blueprint/screen.css" type="text/css" media="screen, projection" />
+    <link rel="stylesheet" href="static/blueprint/print.css" type="text/css" media="print" />
+    <!--[if IE]><link rel="stylesheet" href="static/blueprint/ie.css" type="text/css" media="screen" /><![end if]-->
+    <link rel="stylesheet" href="static/style.css" type="text/css" media="screen" />
+  </head>
+  <body>
+    <div class="container">
+      <h1>Browse</h1>
+      <div class="span-24 masthead_nav">
+        <ul>
+          <li><a href="/">Home</a></li>
+          <li>Edit</li>
+          <li>Browse</li>
+          <li><a href="About">About</a></li>
+        </ul>
+      </div>
+      <hr />
+      <div class="span-24 main_content">
+        $:doc
+      </div>
+      <hr />
+      <div class="span-24 footer_nav">
+        <ul>
+          <li>del.icio.us</li>
+          <li>news.yc</li>
+          <li>programming.reddit</li>
+        </ul>
+      </div>
+    </div>
+  </body>
+</html>

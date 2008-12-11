@@ -1,0 +1,39 @@
+hr {
+  color: #000;
+  background: #000;
+}
+
+.masthead_nav {
+  font-size: 130%;
+}
+
+.masthead_nav ul {
+  /*border: 1px dashed #000;*/
+  margin: 0 0 5px 0;
+  padding: 0;
+}
+
+.masthead_nav li {
+  display: inline;
+  margin-right: 10px;
+}
+
+.source {
+  border: 1px dashed #000;
+  padding: 3px;
+}
+
+.footer_nav ul { text-align: center; }
+
+.footer_nav li {
+  list-style-type: none;
+  display: inline;
+  margin-right: 30px;
+}
+
+.main_content {
+  font-size: 130%;
+  height: 100%;
+  padding-bottom: 20px;
+  margin-bottom: 20px;
+}

@@ -38,7 +38,7 @@ class WikiEditor:
     def GET(self, name):
         try:
             doc = db[name]
-            print render_base.editor(name, doc['content'])
+            print render.editor(name, doc['content'])
         except ResourceNotFound:
             print render.editor(name, '')
     def POST(self, name):

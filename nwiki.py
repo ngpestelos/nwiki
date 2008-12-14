@@ -22,6 +22,8 @@ startPage = 'GoAway'
 server = Server('http://localhost:5984')
 db = server['nwiki']
 
+app = web.application(urls, globals())
+
 class WikiBrowser:
     def GET(self, dir='.'):
         doc = "<ul>"
@@ -36,7 +38,7 @@ class WikiEditor:
     def GET(self, name):
         try:
             doc = db[name]
-            print render.editor(name, doc['content'])
+            print render_base.editor(name, doc['content'])
         except ResourceNotFound:
             print render.editor(name, '')
     def POST(self, name):
@@ -61,11 +63,11 @@ class WikiPage:
             name = startPage
         try:
             doc = db[name]
-            print render.default(name, doc['content'])
+            return render.site(name, doc['content'])
         except ResourceNotFound:
             edit = os.path.join('/edit', name)
             msg = '''<p>%s does not exist. <a href="%s">Create?</a></p>'''
-            print render.default(name, msg % (name, edit))
+            return render.site(name, msg % (name, edit))
 
 if __name__ == "__main__":
-    web.run(urls, globals())
+    app.run()

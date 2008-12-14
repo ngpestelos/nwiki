@@ -5,6 +5,7 @@ from couchdb import Server
 from couchdb import ResourceNotFound
 import os
 from datetime import datetime
+from markdown import markdown
 
 render = web.template.render('static/')
 
@@ -63,7 +64,8 @@ class WikiPage:
             name = startPage
         try:
             doc = db[name]
-            content = web.utils.safemarkdown(doc['content'])
+            #content = web.utils.safemarkdown(doc['content'])
+            content = markdown(doc['content'])
             return render.site(name, content)
         except ResourceNotFound:
             edit = os.path.join('/edit', name)

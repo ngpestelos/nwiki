@@ -22,7 +22,7 @@ startPage = 'GoAway'
 server = Server('http://localhost:5984')
 db = server['nwiki']
 
-app = web.application(urls, globals())
+app = web.application(urls, globals(), autoreload=True)
 
 class WikiBrowser:
     def GET(self, dir='.'):
@@ -32,15 +32,15 @@ class WikiBrowser:
             rows += '''<li><a href="%s">%s</a></li>''' % (d, d)
         doc += rows
         doc += '''</ul>'''
-        print render.browser(doc)
+        return render.browser(doc)
 
 class WikiEditor:
     def GET(self, name):
         try:
             doc = db[name]
-            print render.editor(name, doc['content'])
+            return render.editor(name, doc['content'])
         except ResourceNotFound:
-            print render.editor(name, '')
+            return render.editor(name, '')
     def POST(self, name):
         input = web.input()
         if input.action == 'Save':

@@ -63,7 +63,8 @@ class WikiPage:
             name = startPage
         try:
             doc = db[name]
-            return render.site(name, doc['content'])
+            content = web.utils.safemarkdown(doc['content'])
+            return render.site(name, content)
         except ResourceNotFound:
             edit = os.path.join('/edit', name)
             msg = '''<p>%s does not exist. <a href="%s">Create?</a></p>'''

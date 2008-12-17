@@ -2,12 +2,16 @@
   padding-top: 5px;
 }
 
+li {
+  margin-bottom: 5px;
+}
+
 textarea {
   width: 80%;
 }
 
 body {
-  font: 12px "Minion Pro", Georgia, sans-serif;
+  font: 14px "Minion Pro", Georgia, sans-serif;
   line-height: 1.5em;
 }
 

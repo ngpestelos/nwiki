@@ -11,7 +11,7 @@ li {
 }
 
 textarea {
-  width: 80%;
+  width: 60%;
 }
 
 body {
@@ -62,5 +62,13 @@ hr {
 }
 
 .main_content .instructions {
+  margin-bottom: 10px;
+}
+
+.main_content .form_buttons {
+  padding-left: 10px;
+}
+
+.main_content .form_content {
   margin-bottom: 10px;
 }

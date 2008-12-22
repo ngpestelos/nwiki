@@ -10,6 +10,7 @@ from markdown import markdown
 render = web.template.render('static/')
 
 urls = (
+    '/rename', 'Rename',
     '/edit/(.*)', 'WikiEditor',
     '/browse', 'WikiBrowser',
     '/(.*)', 'WikiPage'
@@ -24,6 +25,24 @@ server = Server('http://localhost:5984')
 db = server['nwiki']
 
 app = web.application(urls, globals(), autoreload=True)
+
+class Rename:
+    def POST(self):
+        input = web.input()
+        if input.action == 'Save':
+            doc = db[input.d]
+            posted = ''
+            if 'posted' in doc:
+                posted = doc['posted']
+            db[input.new_name] = {'content' : doc['content'], \
+              'posted' : posted, 'updated' : datetime.today().ctime()}
+            del db[input.d]
+            web.redirect("/browse")
+        elif input.action == 'Cancel':
+            web.redirect("/browse")
+    def GET(self):
+        input = web.input()
+        return render.rename(input.d)
 
 class WikiBrowser:
     def GET(self):

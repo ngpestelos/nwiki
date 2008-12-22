@@ -14,7 +14,7 @@ $def with (docs)
   </head>
   <body>
     <div class="container">
-      <h1>Browse</h1>
+      <h1>Browse Documents</h1>
       <div class="span-24 masthead_nav">
         <ul>
           <li><a href="/">Home</a></li>
@@ -24,11 +24,17 @@ $def with (docs)
         </ul>
       </div>
       <hr />
-      <div class="span-12 main_content">
-        <ul>
+      <div class="span-16 main_content">
+        <table>
           $for doc in docs:
-          <li><a href="$doc">$doc</a></li>
-        </ul>
+          <tr>
+            <td><a href="$doc">$doc</a></td>
+            <td>
+              <a href="/rename?d=$doc">Rename</a> |
+              Archive
+            </td>
+          </tr>
+        </table>
       </div>
       <hr />
       <div class="span-24 footer_nav">

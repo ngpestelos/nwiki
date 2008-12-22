@@ -76,10 +76,20 @@ hr {
   margin-bottom: 10px;
 }
 
-.main_content .form_buttons {
+.form_buttons {
   padding-left: 10px;
 }
 
-.main_content .form_content {
+.form_content {
+  margin-bottom: 10px;
+}
+
+.form_content label {
+  display: block;
+  margin-bottom: 10px
+}
+
+.form_content input {
+  font-size: 36px;
   margin-bottom: 10px;
 }

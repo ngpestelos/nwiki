@@ -1,4 +1,4 @@
-$def with (doc)
+$def with (docs)
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
@@ -24,8 +24,11 @@ $def with (doc)
         </ul>
       </div>
       <hr />
-      <div class="span-24 main_content">
-        $:doc
+      <div class="span-12 main_content">
+        <ul>
+          $for doc in docs:
+          <li><a href="$doc">$doc</a></li>
+        </ul>
       </div>
       <hr />
       <div class="span-24 footer_nav">

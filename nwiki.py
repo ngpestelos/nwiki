@@ -26,14 +26,8 @@ db = server['nwiki']
 app = web.application(urls, globals(), autoreload=True)
 
 class WikiBrowser:
-    def GET(self, dir='.'):
-        doc = "<ul>"
-        rows = ''
-        for d in db:
-            rows += '''<li><a href="%s">%s</a></li>''' % (d, d)
-        doc += rows
-        doc += '''</ul>'''
-        return render.browser(doc)
+    def GET(self):
+        return render.browser([doc for doc in db])
 
 class WikiEditor:
     def GET(self, name):

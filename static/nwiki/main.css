@@ -16,3 +16,6 @@ body {
 }
 
 #footer { border-top: 1px solid #797979; margin-top: 60px; }
+
+#markdown_guide { padding: 8px; background-color: #9CBDC5; }
+#markdown_guide h5 { text-align: center; }

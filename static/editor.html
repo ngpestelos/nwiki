@@ -2,6 +2,18 @@ $def with (name, doc)
 
 $var title = name
 
-<div id="editor" class="span-24">
-  <p>editor goes here! yeah!</p>
+<div id="editor" class="span-16">
+  <h5>You can use plain HTML or Markdown.</h5>
+  <form>
+    <p>
+      <textarea name="page">$:doc</textarea>
+    </p>
+    <p>
+      <input name="action" type="submit" value="Save" />
+      <input name="action" type="submit" value="Cancel" />
+    </p>
+  </form>
+</div>
+<div id="markdown_guide" class="span-7 last">
+  <h5>Markdown Mini Guide</h5>
 </div>

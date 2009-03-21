@@ -32,7 +32,7 @@ def delete(name):
 class WikiEditor:
     def GET(self, name):
         return render.editor(name, '')
-    def POST(self):
+    def POST(self, name):
         input = web.input()
         if input.action == 'Cancel':
             raise web.seeother('/w')

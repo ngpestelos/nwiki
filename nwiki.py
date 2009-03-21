@@ -37,6 +37,15 @@ class WikiEditor:
         if input.action == 'Cancel':
             raise web.seeother('/w')
 
+        doc = read(name)
+        if doc:
+            update(doc, input.page)
+        else:
+            create(name, input.page)
+
+        raise web.seeother('/w/%s' % name)
+
+
 class WikiPage:
     def GET(self, name):
         if not name:

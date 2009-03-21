@@ -1,49 +1,7 @@
 $def with (name, doc)
 
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
-  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
-  <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>$name - nwiki</title>
-    <!-- Framework CSS -->
-    <link rel="stylesheet" href="/static/blueprint/screen.css" type="text/css" media="screen, projection" />
-    <link rel="stylesheet" href="/static/blueprint/print.css" type="text/css" media="print" />
-    <!--[if IE]><link rel="stylesheet" href="static/blueprint/ie.css" type="text/css" media="screen" /><![end if]-->
-    <link rel="stylesheet" href="/static/style.css" type="text/css" media="screen" />
-  </head>
-  <body>
-    <div class="container">
-      <h1>$name</h1>
-      <div class="span-24 masthead_nav">
-        <ul>
-          <li><a href="/">Home</a></li>
-          <li>Edit</li>
-          <li><a href="/browse">Browse</a></li>
-          <li><a href="/About">About</a></li>
-        </ul>
-      </div>
-      <hr />
-      <div class="span-24 main_content">
-        <h5 class="instructions">You can use plain HTML or Markdown.</h4>
-        <form method="post" accept-charset="utf-8" action="/edit/$name">
-          <p class="form_content">
-            <textarea name="page">$:doc</textarea>
-          </p>
-          <p class="form_buttons">
-            <input name="action" type="submit" value="Save" />
-            <input name="action" type="submit" value="Cancel" />
-          </p>
-        </form>
-      </div>
-      <hr />
-      <div class="span-24 footer_nav">
-        <ul>
-          <li>del.icio.us</li>
-          <li>news.yc</li>
-          <li>programming.reddit</li>
-        </ul>
-      </div>
-    </div>
-  </body>
-</html>
+$var title = name
+
+<div id="editor" class="span-24">
+  <p>editor goes here! yeah!</p>
+</div>

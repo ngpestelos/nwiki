@@ -1,4 +1,4 @@
-$def with (name, content)
+$def with (name, self)
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
@@ -7,34 +7,22 @@ $def with (name, content)
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title>$name - nwiki</title>
     <!-- Framework CSS -->
-    <link rel="stylesheet" href="/static/blueprint/screen.css" type="text/css" media="screen, projection" />
-    <link rel="stylesheet" href="/static/blueprint/print.css" type="text/css" media="print" />
-    <!--[if IE]><link rel="stylesheet" href="/static/blueprint/ie.css" type="text/css" media="screen" /><![end if]-->
-    <link rel="stylesheet" href="/static/style.css" type="text/css" media="screen" />
+    <link rel="stylesheet" href="/static/bp/screen.css" type="text/css" media="screen, projection" />
+    <link rel="stylesheet" href="/static/bp/print.css" type="text/css" media="print" />
+    <!--[if IE]><link rel="stylesheet" href="/static/bp/ie.css" type="text/css" media="screen" /><![end if]-->
+    <link rel="stylesheet" href="/static/nwiki/main.css" type="text/css" media="screen" />
   </head>
   <body>
     <div class="container">
-      <h1>$name</h1>
-      <div class="span-24 masthead_nav">
-        <ul>
-          <li><a href="/">Home</a></li>
-          <li><a href="/edit/$name">Edit</a></li>
-          <li><a href="/browse">Browse</a></li>
-          <li><a href="/About">About</a></li>
-        </ul>
+      <div id="site_id" class="span-24"><h1>nwiki</h1></div>
+      <div id="nav1">
+        <a href="/w">Home</a>
+        <a href="/w/edit">Edit</a>
+        <a href="/w/browse">Browse</a>
+        <a href="/w/about">About</a>
       </div>
-      <hr />
-      <div class="span-24 main_content">
-        $:content
-      </div>
-      <hr />
-      <div class="span-24 footer_nav">
-        <ul>
-          <li>del.icio.us</li>
-          <li>news.yc</li>
-          <li>programming.reddit</li>
-        </ul>
-      </div>
+      $:self
+      <div id="footer" />
     </div>
   </body>
 </html>

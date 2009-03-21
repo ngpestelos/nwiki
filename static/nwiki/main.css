@@ -1,0 +1,18 @@
+body {
+  font-size: 12.5px;
+  font-family: "Minion Pro", Georgia, sans-serif;
+  background-color: #FFFEF5;
+  color: #22222B;
+}
+
+#site_id { margin-top: 5px; }
+
+#nav1 { border-bottom: 1px solid #797979; margin-bottom: 20px; }
+#nav1 a {
+  font-weight: bold;
+  margin-right: 8px;
+  text-decoration: none;
+  color: #376266;
+}
+
+#footer { border-top: 1px solid #797979; margin-top: 60px; }

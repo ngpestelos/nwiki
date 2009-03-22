@@ -1,12 +1,12 @@
-$def with (doc)
+$def with (name, content)
 
-$var title = doc['title']
+$var title = name
 
 <div id="editor" class="prepend-1 span-16">
   <h5>You can use plain HTML or Markdown.</h5>
-  <form method="post" action="/w/edit/$doc['title']">
+  <form method="post" action="/w/edit/$name">
     <p>
-      <textarea name="page">$:doc['content']</textarea>
+      <textarea name="page">$:content</textarea>
     </p>
     <p>
       <input name="action" type="submit" value="Save" />

@@ -52,9 +52,9 @@ class WikiEditor:
     def GET(self, name):
         doc = read(name)
         if doc:
-            return render.editor(doc)
+            return render.editor(doc['title'], doc['content'])
         else:
-            return render.not_found(name)
+            return render.editor(name, '')
 
     def POST(self, name):
         input = web.input()

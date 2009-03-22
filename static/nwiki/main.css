@@ -15,7 +15,9 @@ body {
   color: #376266;
 }
 
-#footer { border-top: 1px solid #797979; margin-top: 60px; }
+#footer { border-top: 1px solid #797979; margin-top: 20px; }
 
 #markdown_guide { padding: 8px; background-color: #9CBDC5; }
 #markdown_guide h5 { text-align: center; }
+
+#options { margin-top: 60px; }

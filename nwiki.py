@@ -30,7 +30,7 @@ def read(name):
     results = db.view('articles/by_title', key=name)
     if len(results) == 0:
         return None
-    return results.rows[0]
+    return results.rows[0].value
 
 def update(name, newcontent):
     pass
@@ -60,7 +60,12 @@ class WikiPage:
         if not name:
             raise web.seeother('/w')
 
-        return render.not_found(name)
+        doc = read(name)
+        if not doc:
+            return render.not_found(name)
+        else:
+            return render.article(doc)
+
 
 class StartPage:
     def GET(self):

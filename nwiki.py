@@ -70,9 +70,9 @@ class WikiPage:
         if not name:
             raise web.seeother('/w')
 
-        doc = read(name)
+        doc = read(name.capitalize())
         if not doc:
-            return render.not_found(name)
+            return render.not_found(name.capitalize())
         else:
             content = markdown(doc['content'])
             return render.article(doc['title'], content)

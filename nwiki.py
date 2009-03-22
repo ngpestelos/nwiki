@@ -1,6 +1,8 @@
 #!/usr/bin/env python
 
 import web, os
+from couchdb import Server
+from datetime import datetime
 
 urls = (
   '/w/edit/(.*)', 'WikiEditor',
@@ -17,11 +19,18 @@ render = web.template.render('static/', base='site')
 
 app = web.application(urls, globals())
 
+db = Server()['nwiki']
+
 def create(name, content):
-    pass
+    doc = {'content' : content, 'created' : datetime.today().ctime(), \
+      'title': name, 'type' : 'article'}
+    return db.create(doc)
 
 def read(name):
-    pass
+    results = db.view('articles/by_title', key=name)
+    if len(results) == 0:
+        return None
+    return results.rows[0]
 
 def update(name, newcontent):
     pass

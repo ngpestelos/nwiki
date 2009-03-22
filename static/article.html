@@ -2,12 +2,11 @@ $def with (name, content)
 
 $var title = name
 
-<h2>$name</h2>
-
-<div id="content" class="span-24">
+<div id="content" class="prepend-1 span-23">
+  <h2>$name</h2>
   $:content
 </div>
 
-<div id="options" class="prepend-1">
+<div id="options" class="prepend-1 span-23 last">
   <a href="/w/edit/$name">Edit</a>
 </div>

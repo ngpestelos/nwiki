@@ -11,7 +11,6 @@ body {
   font-weight: bold;
   margin-right: 8px;
   text-decoration: none;
-  color: #376266;
   font-size: 14px;
 }
 
@@ -20,4 +19,4 @@ body {
 #markdown_guide { padding: 8px; background-color: #9CBDC5; }
 #markdown_guide h5 { text-align: center; }
 
-#options { margin-top: 60px; }
+#options { margin-top: 20px; }

@@ -38,9 +38,15 @@ def update(name, newcontent):
 def delete(name):
     pass
 
+
 class WikiEditor:
     def GET(self, name):
-        return render.editor(name, '')
+        doc = read(name)
+        if doc:
+            return render.editor(doc)
+        else:
+            return render.not_found(name)
+
     def POST(self, name):
         input = web.input()
         if input.action == 'Cancel':

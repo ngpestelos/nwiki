@@ -32,8 +32,11 @@ def read(name):
         return None
     return results.rows[0].value
 
-def update(name, newcontent):
-    pass
+def update(doc, newcontent):
+    doc['updated'] = datetime.today().ctime()
+    doc['content'] = newcontent
+    id = doc['_id']
+    db[id] = doc
 
 def delete(name):
     pass

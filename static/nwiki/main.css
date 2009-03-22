@@ -5,6 +5,7 @@ body {
 }
 
 #site_id { margin-top: 5px; }
+#site_id h2 { color: #797979; }
 
 #nav1 { border-bottom: 1px solid #797979; margin-bottom: 20px; }
 #nav1 a {

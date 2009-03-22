@@ -3,6 +3,7 @@
 import web, os
 from couchdb import Server
 from datetime import datetime
+from markdown import markdown
 
 urls = (
   '/w/edit/(.*)', 'WikiEditor',
@@ -73,7 +74,8 @@ class WikiPage:
         if not doc:
             return render.not_found(name)
         else:
-            return render.article(doc)
+            content = markdown(doc['content'])
+            return render.article(doc['title'], content)
 
 
 class StartPage:

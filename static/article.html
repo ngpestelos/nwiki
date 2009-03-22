@@ -1,13 +1,13 @@
-$def with (doc)
+$def with (name, content)
 
-$var title = doc['title']
+$var title = name
 
-<h2>$doc['title']</h2>
+<h2>$name</h2>
 
 <div id="content" class="span-24">
-  $doc['content']
+  $:content
 </div>
 
 <div id="options" class="prepend-1">
-  <a href="/w/edit/$doc['title']">Edit</a>
+  <a href="/w/edit/$name">Edit</a>
 </div>

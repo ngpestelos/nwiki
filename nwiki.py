@@ -6,6 +6,7 @@ from datetime import datetime
 from markdown import markdown
 
 urls = (
+  '/w/About', 'AboutPage',
   '/w/edit/(.*)', 'WikiEditor',
   '/w/(.*)', 'WikiPage',
   '/w', 'StartPage'
@@ -43,6 +44,10 @@ def delete(name):
     pass
 
 
+class AboutPage:
+    def GET(self):
+        return render.about()
+
 class WikiEditor:
     def GET(self, name):
         doc = read(name)
@@ -70,9 +75,12 @@ class WikiPage:
         if not name:
             raise web.seeother('/w')
 
-        doc = read(name.capitalize())
+        if name[0].islower():
+            name = name[0].upper() + name[1:]
+
+        doc = read(name)
         if not doc:
-            return render.not_found(name.capitalize())
+            return render.not_found(name)
         else:
             content = markdown(doc['content'])
             return render.article(doc['title'], content)

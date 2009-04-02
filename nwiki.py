@@ -6,7 +6,7 @@ from datetime import datetime
 from markdown import markdown
 
 urls = (
-  '/w/edit/(.*)', 'Editor',
+  '/w/[e|E]dit/(.*)', 'Editor',
   '/w/(.*)', 'Page',
   '/w', 'Start'
 )

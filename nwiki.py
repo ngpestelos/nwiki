@@ -6,18 +6,13 @@ from datetime import datetime
 from markdown import markdown
 
 urls = (
-  '/w/About', 'AboutPage',
-  '/w/edit/(.*)', 'WikiEditor',
-  '/w/(.*)', 'WikiPage',
-  '/w', 'StartPage'
+  '/w', 'Start'
 )
 
 startPage = 'Welcome'
 
-render = web.template.render('static/', base='site')
-
-# don't create docs for these pages
-#watch = ['browse', 'edit', 'about', 'home']
+render = web.template.render('html/', base='site')
+render_bare = web.template.render('html/')
 
 app = web.application(urls, globals())
 
@@ -86,9 +81,9 @@ class WikiPage:
             return render.article(doc['title'], content)
 
 
-class StartPage:
+class Start:
     def GET(self):
-        raise web.seeother('/w/Welcome')
+        return render_bare.welcome()
 
 if __name__ == '__main__':
     app.run()

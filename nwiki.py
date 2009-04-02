@@ -29,20 +29,21 @@ def create(slug, content):
 def read(slug):
     fun = '''
     function(doc) {
-      if (doc.slug == '%s')
-        emit(doc._id, doc);
+      if (doc.type == 'post' && doc.slug == '%s')
+        emit([doc.slug, doc.rev_number], doc);
     }''' % slug
     res = [r for r in db.query(fun)]
     if len(res) == 0:
         return None
     else:
-        return res[0].value
+        return res[-1].value
 
-#def update(doc, newcontent):
-#    doc['updated'] = datetime.today().ctime()
-#    doc['content'] = newcontent
-#    id = doc['_id']
-#    db[id] = doc
+def update(doc, newcontent):
+    newdoc = {'slug' : doc['slug'], 'body' : newcontent, \
+      'format' : 'markdown', 'html' : markdown(newcontent), \
+      'rev_number' : doc['rev_number'] + 1, \
+      'posted' : datetime.today().ctime(), 'type' : 'post'}
+    return db.create(newdoc)
 
 class AboutPage:
     def GET(self):
@@ -61,7 +62,12 @@ class Editor:
         if input.action == 'Cancel':
             raise web.seeother('/w')
 
-        create(slug, input.content)
+        doc = read(slug)
+        if doc:
+            update(doc, input.content)
+        else:
+            create(slug, input.content)
+
         raise web.seeother('/w/%s' % slug)
 
 class Page:

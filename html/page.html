@@ -1,0 +1,12 @@
+$def with (slug, html)
+
+$var title = slug
+
+<div id="content" class="prepend-1 span-23">
+  <h2>$slug</h2>
+  $:html
+</div>
+
+<div id="options" class="prepend-1 span-23 last">
+  <a href="/w/edit/$slug">Edit</a>
+</div>

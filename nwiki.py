@@ -30,29 +30,19 @@ def read(slug):
     fun = '''
     function(doc) {
       if (doc.slug == '%s')
-        emit(doc._id, doc); }
-    ''' % slug
-    return [r for r in db.query(fun)]
-
-#def create(name, content):
-#    doc = {'content' : content, 'created' : datetime.today().ctime(), \
-#      'title': name, 'type' : 'article'}
-#    return db.create(doc)
-
-#def read(name):
-#    results = db.view('articles/slugs', key=name)
-#    if len(results) == 0:
-#        return None
-#    return results.rows[0].value
+        emit(doc._id, doc);
+    }''' % slug
+    res = [r for r in db.query(fun)]
+    if len(res) == 0:
+        return None
+    else:
+        return res[0].value
 
 #def update(doc, newcontent):
 #    doc['updated'] = datetime.today().ctime()
 #    doc['content'] = newcontent
 #    id = doc['_id']
 #    db[id] = doc
-
-#def delete(name):
-#    pass
 
 class AboutPage:
     def GET(self):

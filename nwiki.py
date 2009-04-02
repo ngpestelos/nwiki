@@ -6,6 +6,8 @@ from datetime import datetime
 from markdown import markdown
 
 urls = (
+  '/w/[a|A]bout', 'About',
+  '/w/[h|H]ome', 'Start',
   '/w/[e|E]dit/(.*)', 'Editor',
   '/w/(.*)', 'Page',
   '/w', 'Start'
@@ -87,6 +89,10 @@ class Page:
 class Start:
     def GET(self):
         return render_bare.welcome()
+
+class About:
+    def GET(self):
+        return render_bare.about()
 
 if __name__ == '__main__':
     app.run()

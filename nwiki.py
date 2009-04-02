@@ -23,7 +23,7 @@ db = Server()['nwiki']
 def create(slug, content):
     doc = {'slug' : slug, 'body' : content, 'format' : 'markdown', \
       'html' : markdown(content), 'rev_number' : 0, \
-      'posted' : datetime.today().ctime()}
+      'posted' : datetime.today().ctime(), 'type' : post}
     return db.create(doc)
 
 def read(slug):
@@ -50,7 +50,11 @@ class AboutPage:
 
 class Editor:
     def GET(self, slug):
-        return render.editor(slug, '')
+        doc = read(slug)
+        if doc:
+            return render.editor(doc['slug'], doc['body'])
+        else:
+            return render.editor(slug, '')
 
     def POST(self, slug):
         input = web.input()

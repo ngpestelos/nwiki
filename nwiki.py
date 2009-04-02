@@ -26,6 +26,14 @@ def create(slug, content):
       'posted' : datetime.today().ctime()}
     return db.create(doc)
 
+def read(slug):
+    fun = '''
+    function(doc) {
+      if (doc.slug == '%s')
+        emit(doc._id, doc); }
+    ''' % slug
+    return [r for r in db.query(fun)]
+
 #def create(name, content):
 #    doc = {'content' : content, 'created' : datetime.today().ctime(), \
 #      'title': name, 'type' : 'article'}
@@ -70,7 +78,11 @@ class Page:
         if slug[0].islower():
             slug = slug[0].upper() + slug[1:]
 
-        return render.not_found(slug)
+        doc = read(slug)
+        if not doc:
+            return render.not_found(slug)
+        else:
+            return render.page(doc['slug'], doc['html'])
 
 class Start:
     def GET(self):

@@ -39,7 +39,7 @@ def read(slug):
     if len(res) == 0:
         return None
     else:
-        return res[-1].value
+        return res[0].value
 
 def update(doc, newcontent):
     newdoc = {'slug' : doc['slug'], 'body' : newcontent, \

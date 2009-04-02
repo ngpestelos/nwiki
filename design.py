@@ -7,10 +7,8 @@ db = Server()['nwiki']
 articles = {
   "language" : "javascript",
   "views" : {
-    "by_title" : {
-      "map" : """function(doc) {
-                   if (doc.type == 'article') emit(doc.title, doc);
-                 }"""
+    "slugs" : {
+      "map" : "function(doc) { if (doc.type == 'post') emit(doc.slug, doc); }"
     }
   }
 }

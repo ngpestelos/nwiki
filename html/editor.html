@@ -1,0 +1,16 @@
+$def with (slug, content)
+
+$var title = slug
+
+<div id="editor" class="prepend-1 span-16">
+  <h5>You can use plain HTML or Markdown.</h5>
+  <form method="post" action="/w/edit/$slug">
+    <p>
+      <textarea name="content">$:content</textarea>
+    </p>
+    <p>
+      <input name="action" type="submit" value="Save" />
+      <input name="action" type="submit" value="Cancel" />
+    </p>
+  </form>
+</div>

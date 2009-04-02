@@ -6,6 +6,7 @@ from datetime import datetime
 from markdown import markdown
 
 urls = (
+  '/w/[b|B]rowse', 'Browse',
   '/w/[a|A]bout', 'About',
   '/w/[h|H]ome', 'Start',
   '/w/[e|E]dit/(.*)', 'Editor',
@@ -25,7 +26,7 @@ db = Server()['nwiki']
 def create(slug, content):
     doc = {'slug' : slug, 'body' : content, 'format' : 'markdown', \
       'html' : markdown(content), \
-      'posted' : datetime.today().ctime(), 'type' : post}
+      'posted' : datetime.today().ctime(), 'type' : 'post'}
     return db.create(doc)
 
 def read(slug):
@@ -45,6 +46,16 @@ def update(doc, newcontent):
       'format' : 'markdown', 'html' : markdown(newcontent), \
       'posted' : datetime.today().ctime(), 'type' : 'post'}
     return db.create(newdoc)
+
+def all_posts():
+    fun = '''
+    function(doc) { if (doc.type == 'post') emit(doc.slug, null); }'''
+    d = {}
+    for r in db.query(fun):
+        d[r.key] = ''
+    s = d.keys()
+    s.sort()
+    return s
 
 class AboutPage:
     def GET(self):
@@ -84,6 +95,11 @@ class Page:
             return render.not_found(slug)
         else:
             return render.page(doc['slug'], doc['html'])
+
+class Browse:
+    def GET(self):
+        docs = all_posts()
+        return render.browser(docs)
 
 class Start:
     def GET(self):

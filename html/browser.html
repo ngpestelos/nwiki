@@ -1,0 +1,11 @@
+$def with (slugs)
+
+$var title = "Posts"
+
+<table>
+  $for slug in slugs:
+  <tr>
+    <td><a href="#">$slug</a></td>
+    <td>Rename</td>
+  </tr>
+</table>

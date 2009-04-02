@@ -6,6 +6,7 @@ from datetime import datetime
 from markdown import markdown
 
 urls = (
+  '/w/(.*)', 'Page',
   '/w', 'Start'
 )
 
@@ -80,6 +81,15 @@ class WikiPage:
             content = markdown(doc['content'])
             return render.article(doc['title'], content)
 
+class Page:
+    def GET(self, name):
+        if not name:
+            raise web.seeother('/w')
+
+        if name[0].islower():
+            name = name[0].upper() + name[1:]
+
+        return render.not_found(name)
 
 class Start:
     def GET(self):

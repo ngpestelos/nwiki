@@ -24,7 +24,7 @@ db = Server()['nwiki']
 
 def create(slug, content):
     doc = {'slug' : slug, 'body' : content, 'format' : 'markdown', \
-      'html' : markdown(content), 'rev_number' : 0, \
+      'html' : markdown(content), \
       'posted' : datetime.today().ctime(), 'type' : post}
     return db.create(doc)
 
@@ -32,7 +32,7 @@ def read(slug):
     fun = '''
     function(doc) {
       if (doc.type == 'post' && doc.slug == '%s')
-        emit([doc.slug, doc.rev_number], doc);
+        emit([doc.slug, doc.posted], doc);
     }''' % slug
     res = [r for r in db.query(fun)]
     if len(res) == 0:
@@ -43,7 +43,6 @@ def read(slug):
 def update(doc, newcontent):
     newdoc = {'slug' : doc['slug'], 'body' : newcontent, \
       'format' : 'markdown', 'html' : markdown(newcontent), \
-      'rev_number' : doc['rev_number'] + 1, \
       'posted' : datetime.today().ctime(), 'type' : 'post'}
     return db.create(newdoc)
 

@@ -19,5 +19,6 @@ for doc in results:
     today = datetime.today().ctime()
     newdoc = {'slug' : doc['_id'], 'posted' : doc.get('posted', today), \
       'format' : 'markdown', 'body' : doc['content'], \
-      'html' : markdown(doc['content']), 'type' : 'post'}
+      'html' : markdown(doc['content']), 'type' : 'post', \
+      'rev_number' : 0}
     destdb.create(newdoc)
